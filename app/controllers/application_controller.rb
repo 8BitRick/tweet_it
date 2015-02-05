@@ -2,11 +2,17 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  layout 'base_layout'
 
   require 'twitter'
 
   def welcome
+    if(current_user)
+      redirect_to '/tweet_it'
+    end
+  end
 
+  def tweet_it
   end
 
   def client
