@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
   require 'twitter'
 
+  def welcome
+
+  end
+
   def client
     @client ||= Twitter::REST::Client.new do |config|
       config.consumer_key        = 'YOUR_KEY_HERE'
@@ -53,6 +57,12 @@ class ApplicationController < ActionController::Base
     #str = st
     puts str
 
-    render plain: str
+    #render plain: str
   end
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if (session && session[:user_id])
+  end
+
+  helper_method :current_user
 end

@@ -2,6 +2,12 @@ Rails.application.routes.draw do
   resources :tweets
 
   get 'temp' => 'application#temp'
+  get 'welcome' => 'application#welcome'
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/') # Tell user he needs to approve
+  get 'signout', to: 'sessions#destroy', as: 'signout'
+  root 'application#welcome'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
