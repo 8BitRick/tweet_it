@@ -47,11 +47,10 @@
     <!--Tweet list of that politician-->
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Governator's Tweets</h3>
+        <h3 class="panel-title"><%= current_user.name%>'s Tweets</h3>
       </div>
       <div class="panel-body">
-        <%= render partial: "/tweets/tweet" %>
-        <%#= render partial: "feed_item", collection: @feed_items %>
+        <%= render partial: "/tweets/tweet", collection: @tweets %>
       </div>
     </div>
   </div>

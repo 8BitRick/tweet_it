@@ -1,20 +1,9 @@
 <div class="media">
   <a class="pull-left">
-     <img class="small-pic" src="http://www.gladworks.com/files/uploads/_gw_blog_20120524_coolstuff.jpg" alt="My Face"/>
-    <!--<img src="<%#= feed_item.profile_pic(controller.graph) %>" alt="profile pic"/>-->
-    <!-- <class="media-object" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/t1.0-1/c62.120.521.521/s50x50/404787_10150536221843150_1151847998_n.jpg" alt="Ryans Face"> -->
+    <%= image_tag(tweet.user_pic_url, :class => "media-object", :alt => "user_profile picture") %>
   </a>
-  <%= image_tag('http://30.media.tumblr.com/tumblr_m0cmnvzPga1r4mn88o1_500.jpg', :class => "pull-right small-pic", :alt => "fb picture") %>
-  <!--<#%= image_tag(feed_item.recipient_pic(controller.graph), :class => "pull-right", :alt => "fb picture") if feed_item.recipient? %>-->
   <div class="media-body">
-    <!--<h4 class="media-heading"><#%= feed_item.name %>  <small><#%= feed_item.created_time_in_words %></small> </h4>-->
-    <h4 class="media-heading">media heading  <small>time in words</small> </h4>
-
-    <!-- Generic field things -->
-    Tweet goes here.
-
-    <%= link_to('a picture here','#') %>
-    <!--<#%= link_to(image_tag(feed_item.loaded_data["picture"], :alt => "fb picture"), feed_item.loaded_data["link"]) if feed_item.loaded_data["picture"].present? %>-->
-
+    <h4 class="media-heading"><%= tweet.user %> <small><%= tweet.created_time_in_words %> </small> </h4>
+    <%= tweet.tx %>
   </div>
 </div>

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   layout 'base_layout'
 
   require 'twitter'
+  require 'pp'
 
   def welcome
     if(current_user)
@@ -13,16 +14,15 @@ class ApplicationController < ActionController::Base
   end
 
   def tweet_it
+    @tweets = statuses
   end
 
   def client
     @client ||= Twitter::REST::Client.new do |config|
-      config.consumer_key        = 'YOUR_KEY_HERE'
-      config.consumer_secret     = 'YOUR_KEY_SECRET_HERE'
-
-      # TODO - get these from omniauth
-      config.access_token        = '149759208-70XOOoJGlLflAq2filD8kStv6fqpqV0Jrbd7GbTB'
-      config.access_token_secret = 'F70HdzbbeoPEOF2bbjPNLMNoa7vbv6tXxxdRKsTz1rQrZ'
+      config.consumer_key        = ENV['TWITTER_KEY']
+      config.consumer_secret     = ENV['TWITTER_SECRET']
+      config.access_token        = session['token']
+      config.access_token_secret = session['secret']
     end
   end
 
@@ -48,7 +48,18 @@ class ApplicationController < ActionController::Base
   end
 
   def statuses
-    @statuses ||= client.user_timeline(client.current_user).map{|t| t.full_text}
+    return @statuses if @statuses
+
+    raw_tweets = client.user_timeline(client.current_user)#.map{|t| t.full_text}
+    raw_tweets.each do |s|
+      h = Hash(s)
+      Tweet.where(user: h[:user][:screen_name],
+                  id_str: h[:id_str],
+                  tx: h[:text],
+                  raw: h.to_json).first_or_create
+    end
+
+    @statuses = Tweet.where(user: current_user.name)
   end
 
   def temp
