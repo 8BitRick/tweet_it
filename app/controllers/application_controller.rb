@@ -17,6 +17,12 @@ class ApplicationController < ActionController::Base
     @tweets = statuses
   end
 
+  def post_tweet
+    pp params
+    client.update(params[:tweet_to_post])
+    redirect_to '/tweet_it'
+  end
+
   def client
     @client ||= Twitter::REST::Client.new do |config|
       config.consumer_key        = ENV['TWITTER_KEY']
@@ -48,6 +54,8 @@ class ApplicationController < ActionController::Base
   end
 
   def statuses
+    # TODO - HACKING TO prevent hitting twitter api too often
+    @statuses = Tweet.where(user: current_user.name)
     return @statuses if @statuses
 
     raw_tweets = client.user_timeline(client.current_user)#.map{|t| t.full_text}

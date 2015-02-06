@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/') # Tell user he needs to approve
   get 'signout', to: 'sessions#destroy', as: 'signout'
+  post 'post_tweet', to: 'application#post_tweet'
   root 'application#welcome'
 
 
