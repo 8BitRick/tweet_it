@@ -13,18 +13,15 @@ class ApplicationController < ActionController::Base
   end
 
   def tweet_it
-    # TODO - Add smarter caching trigger here (like time or something)
-    #update_influencers
-    #@users = User.all
-
-    #time_line = client.user_timeline('fakegrimlock')
-    #save_tweets(time_line)
-
-    #raise time_line.to_json
+    # Influencers will only be established once
+    # TODO - add some way to refresh the leader list, esp if we make it dynamic
+    update_influencers if Influencer.count <= 0
 
     @influencers = Influencer.all
+    @last_user = Influencer.first.handle
+    @display_user = @last_user
+    @tweets = Tweet.where(user: @last_user)
     #@tweets = statuses
-    @tweets = Tweet.where(user: 'FAKEGRIMLOCK')
   end
 
   def update_tweets
