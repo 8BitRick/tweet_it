@@ -1,19 +1,42 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
+  include TwitterClient
 
   # GET /tweets
   # GET /tweets.json
   def index
-    if(params[:user] && params[:user] == @last_user)
-      @tweets
-    elsif(params[:user])
-      @last_user = params[:user]
-      @tweets = Tweet.where(user: @last_user)
-      @display_user = @last_user
+    user = params[:user]
+    cache_updated = update_tweet_cache(user)
+
+    if(user)
+      if(cache_updated || user != @last_user)
+        @tweets = Tweet.where(user: user).take(20)
+      end
+
+      @display_user = user
+      @last_user = user
     else
-      @tweets = Tweet.all
+      @tweets = Tweet.all.take(20)
       @display_user = 'All leader\'s'
+      @last_user = nil
     end
+  end
+
+  def update_tweet_cache(user)
+    inf = Influencer.find_by(handle: user)
+    if(inf.nil?)
+      return false
+    end
+
+    # Check if need to update tweet cache for this influencer
+    if(inf.last_tweet_request.nil? || (inf.last_tweet_request > 2.minutes.ago))
+      raw_tweets = client.user_timeline(user)
+      save_tweets(raw_tweets)
+      inf.last_tweet_request = Time.now
+      return true
+    end
+
+    false
   end
 
   # GET /tweets/1

@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  include TwitterClient
 
   require 'twitter'
   require 'pp'
@@ -15,6 +16,7 @@ class ApplicationController < ActionController::Base
   def tweet_it
     # Influencers will only be established once
     # TODO - add some way to refresh the leader list, esp if we make it dynamic
+    pp followers
     update_influencers if Influencer.count <= 0
 
     @influencers = Influencer.all
@@ -32,15 +34,6 @@ class ApplicationController < ActionController::Base
     pp params
     client.update(params[:tweet_to_post])
     redirect_to '/tweet_it'
-  end
-
-  def client
-    @client ||= Twitter::REST::Client.new do |config|
-      config.consumer_key        = ENV['TWITTER_KEY']
-      config.consumer_secret     = ENV['TWITTER_SECRET']
-      config.access_token        = session['token']
-      config.access_token_secret = session['secret']
-    end
   end
 
   def update_influencers
@@ -89,16 +82,6 @@ class ApplicationController < ActionController::Base
     save_tweets(raw_tweets)
 
     @statuses = Tweet.where(user: current_user.name)
-  end
-
-  def save_tweets(raw_tweets)
-    raw_tweets.each do |s|
-      h = Hash(s)
-      Tweet.where(user: h[:user][:screen_name],
-                  id_str: h[:id_str],
-                  tx: h[:text],
-                  raw: h.to_json).first_or_create
-    end
   end
 
   def temp
