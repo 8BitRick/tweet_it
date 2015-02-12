@@ -16,8 +16,15 @@ class ApplicationController < ActionController::Base
     # TODO - Add smarter caching trigger here (like time or something)
     #update_influencers
     #@users = User.all
+
+    #time_line = client.user_timeline('fakegrimlock')
+    #save_tweets(time_line)
+
+    #raise time_line.to_json
+
     @influencers = Influencer.all
-    @tweets = statuses
+    #@tweets = statuses
+    @tweets = Tweet.where(user: 'FAKEGRIMLOCK')
   end
 
   def post_tweet
@@ -78,6 +85,12 @@ class ApplicationController < ActionController::Base
     return @statuses if @statuses
 
     raw_tweets = client.user_timeline(client.current_user)#.map{|t| t.full_text}
+    save_tweets(raw_tweets)
+
+    @statuses = Tweet.where(user: current_user.name)
+  end
+
+  def save_tweets(raw_tweets)
     raw_tweets.each do |s|
       h = Hash(s)
       Tweet.where(user: h[:user][:screen_name],
@@ -85,8 +98,6 @@ class ApplicationController < ActionController::Base
                   tx: h[:text],
                   raw: h.to_json).first_or_create
     end
-
-    @statuses = Tweet.where(user: current_user.name)
   end
 
   def temp
