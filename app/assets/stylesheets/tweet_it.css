@@ -3,19 +3,19 @@
 **/
 #carousel-image-and-text {
     width: 940px;
-    /*height: 279px;*/
-    height: 199px;
+    height: 279px;
+    /*height: 199px;*/
     margin: 0 auto;
 }
 #carousel-image-and-text .arrow-holder {
-    /*height: 250px;*/
-    height: 170px;
+    height: 250px;
+    /*height: 170px;*/
 }
 #carousel-image-and-text .touchcarousel-item {
     margin-right: 1px;
-    /*width: 170px;*/
+    width: 170px;
     /*height: 277px;*/
-    width: 150px;
+    /*width: 150px;*/
     height: 197px;
 }
 #carousel-image-and-text .item-block {

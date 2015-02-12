@@ -13,7 +13,10 @@ class ApplicationController < ActionController::Base
   end
 
   def tweet_it
-    @users = User.all
+    # TODO - Add smarter caching trigger here (like time or something)
+    #update_influencers
+    #@users = User.all
+    @influencers = Influencer.all
     @tweets = statuses
   end
 
@@ -29,6 +32,22 @@ class ApplicationController < ActionController::Base
       config.consumer_secret     = ENV['TWITTER_SECRET']
       config.access_token        = session['token']
       config.access_token_secret = session['secret']
+    end
+  end
+
+  def update_influencers
+    influencer_list = ['fakegrimlock','kimjongnumberun','thepresobama','elbloombito']
+
+    # Save off our influencers
+    influencer_list.each do |influencer|
+      user_data = client.user(influencer)
+      Influencer.where(
+          name: user_data[:name],
+          handle: user_data[:screen_name],
+          description: user_data[:description],
+          id_str: user_data[:id_str],
+          pic: user_data[:profile_image_url],
+          raw: user_data.to_json).first_or_create
     end
   end
 
