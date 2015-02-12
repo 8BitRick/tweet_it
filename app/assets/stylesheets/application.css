@@ -12,6 +12,9 @@
  *
  *
  *= require_self
+ *= require touchcarousel
+ *= require grey-blue-skin/grey-blue-skin
+ *= require tweet_it
  *= require cerulean/loader
  *= require cerulean/bootswatch
  */

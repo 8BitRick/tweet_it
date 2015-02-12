@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   resources :tweets
 
-  get 'temp' => 'application#temp'
+  root 'application#welcome'
   get 'welcome' => 'application#welcome'
   get 'tweet_it' => 'application#tweet_it'
-  get 'auth/:provider/callback', to: 'sessions#create'
-  get 'auth/failure', to: redirect('/') # Tell user he needs to approve
   get 'signout', to: 'sessions#destroy', as: 'signout'
-  post 'post_tweet', to: 'application#post_tweet'
-  root 'application#welcome'
+  post 'post_tweet', to: 'application#post_tweet' # TODO - move to tweet#create
 
+  # Twitter OAuth
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/') # TODO - Tell user he needs to approve
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

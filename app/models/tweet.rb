@@ -4,7 +4,7 @@ class Tweet < ActiveRecord::Base
   def user_pic_url
     return @user_pic if @user_pic
 
-    pp raw_hash
+    #pp raw_hash
     @user_pic = raw_hash['user']['profile_image_url']
   end
 

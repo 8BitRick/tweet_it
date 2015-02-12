@@ -3,20 +3,45 @@
 <head>
   <title>TweetIt</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= yield(:page_stylesheet) if content_for?(:page_stylesheet) %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div id="container">
-  <div id="user_nav">
-    <% if current_user %>
-        Signed in as <%= current_user.name %>!
-        <%= link_to "Sign out", signout_path %>
-    <% else %>
-        <%= link_to "Sign in with Twitter", "/auth/twitter" %>
-    <% end %>  </div>
-</div>
-<%= yield %>
 
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Tweet it to the Man!</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+            <li><a href'#">Signed in as <%= current_user.name %>!</a></li>
+            <li class="active"><%= link_to "Sign out", signout_path %></li>
+        <% else %>
+            <li class="active"><%= link_to "Sign in with Twitter", "/auth/twitter" %></li>
+        <% end %>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+
+<div class="container">
+
+  <%= yield %>
+
+</div> <!-- /container -->
+
+<!-- Javascripts
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<%= yield(:page_javascript) if content_for?(:page_javascript) %>
 </body>
 </html>
