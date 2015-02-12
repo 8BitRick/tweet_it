@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'application#welcome'
   get 'welcome' => 'application#welcome'
   get 'tweet_it' => 'application#tweet_it'
+  get 'update_tweets' => 'application#update_tweets'
   get 'signout', to: 'sessions#destroy', as: 'signout'
   post 'post_tweet', to: 'application#post_tweet' # TODO - move to tweet#create
 

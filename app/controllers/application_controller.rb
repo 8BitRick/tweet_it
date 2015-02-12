@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
     @tweets = Tweet.where(user: 'FAKEGRIMLOCK')
   end
 
+  def update_tweets
+    @tweets = Tweet.where(user: params[:user])
+  end
+
   def post_tweet
     pp params
     client.update(params[:tweet_to_post])

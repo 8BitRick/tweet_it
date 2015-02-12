@@ -1,0 +1,8 @@
+<div class="panel panel-primary" id="tweets">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= @display_user %>'s Tweets</h3>
+  </div>
+  <div class="panel-body">
+    <%= render partial: "/tweets/tweet", collection: @tweets %>
+  </div>
+</div>

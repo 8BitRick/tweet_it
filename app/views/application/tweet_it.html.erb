@@ -140,14 +140,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <!--Tweet list of that politician-->
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= current_user.name%>'s Tweets</h3>
-      </div>
-      <div class="panel-body">
-        <%= render partial: "/tweets/tweet", collection: @tweets %>
-      </div>
-    </div>
+    <%= render partial: 'tweets/tweet_panel' %>
   </div>
 </div>
 

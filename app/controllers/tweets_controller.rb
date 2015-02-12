@@ -4,7 +4,16 @@ class TweetsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def index
-    @tweets = Tweet.all
+    if(params[:user] && params[:user] == @last_user)
+      @tweets
+    elsif(params[:user])
+      @last_user = params[:user]
+      @tweets = Tweet.where(user: @last_user)
+      @display_user = @last_user
+    else
+      @tweets = Tweet.all
+      @display_user = 'All leader\'s'
+    end
   end
 
   # GET /tweets/1
