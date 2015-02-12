@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def tweet_it
+    @users = User.all
     @tweets = statuses
   end
 

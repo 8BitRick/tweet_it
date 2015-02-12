@@ -3,20 +3,26 @@
 **/
 #carousel-image-and-text {
     width: 940px;
-    height: 279px;
+    /*height: 279px;*/
+    height: 199px;
     margin: 0 auto;
 }
 #carousel-image-and-text .arrow-holder {
-    height: 250px;
+    /*height: 250px;*/
+    height: 170px;
 }
 #carousel-image-and-text .touchcarousel-item {
     margin-right: 1px;
-    width: 170px;
-    height: 277px;
+    /*width: 170px;*/
+    /*height: 277px;*/
+    width: 150px;
+    height: 197px;
 }
 #carousel-image-and-text .item-block {
-    width: 170px;
-    height: 277px;
+    /*width: 170px;*/
+    /*height: 277px;*/
+    width: 150px;
+    height: 197px;
     display: block;
 }
 #carousel-image-and-text .item-block img,
@@ -28,8 +34,10 @@
     margin: 0;
 }
 #carousel-image-and-text .item-block img {
-    width: 170px;
-    height: 230px;
+    /*width: 170px;*/
+    /*height: 230px;*/
+    width: 150px;
+    height: 150px;
     border: 0;
     padding: 0;
 }

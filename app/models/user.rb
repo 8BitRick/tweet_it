@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def profile_bg_url; @user_pic = raw_hash['profile_background_image_url'] end
   def user_pic_url; @user_pic = raw_hash['profile_image_url'] end
+  def description; @description = raw_hash['description'] end
   def raw_hash; @raw_hash ||= JSON.parse(raw) end
 end

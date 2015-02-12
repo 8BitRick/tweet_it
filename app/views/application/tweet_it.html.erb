@@ -6,6 +6,8 @@
 <div class="row">
   <div id="carousel-image-and-text" class="touchcarousel grey-blue">
     <ul class="touchcarousel-container">
+      <%= render partial: "/users/user", collection: @users %>
+
       <li class="touchcarousel-item">
         <a class="item-block" href="#">
           <img src="demo-images/170x230/1.jpg" width="170" height="230" />
@@ -126,20 +128,12 @@
     Post your tweet!
     <%= form_tag ({action: "post_tweet", method: :post, class: 'input-group', remote: true}) do %>
     <div class="input-group">
-      <!--<span class="input-group-addon" id="basic-addon1">@</span>-->
-    <!--<#% form_tag ({action: '/blah'}, {remote: true, method: :post, class: 'input-group'}) do %>-->
-      <!--<form action="post_tweet" method="post" class="input-group">-->
-      <!--<#%= form_tag do %>-->
-          <input name="tweet_to_post" type="text" class="form-control" placeholder="@Governator ... you are so great" aria-describedby="basic-addon1">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="submit">Tweet It!</button>
-          </span>
-      <!--<#% end %>-->
+      <input name="tweet_to_post" type="text" class="form-control" placeholder="@Governator ... you are so great" aria-describedby="basic-addon1">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Tweet It!</button>
+      </span>
     </div>
     <% end %>
-    <!--<div>-->
-      <!--<button type="button" class="btn btn-default">Left</button>-->
-    <!--</div>-->
   </div>
 </div>
 <div class="row">
