@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     # TODO - add some way to refresh the leader list, esp if we make it dynamic
     update_influencers if Influencer.count <= 0
 
-    @users = [current_user]
+    @users = User.all
     @influencers = Influencer.all
     @tweets = Tweet.latest_tweets
     @display_user = Tweet.display_name
