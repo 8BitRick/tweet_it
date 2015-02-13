@@ -1,5 +1,16 @@
-== Tweet It
+= Tweet it to the man!
 
-A simple app for posting tweets and follow people.
+Find your local leaders and let "the man" have it.
 
-Details to be added soon...
+https://mysterious-savannah-8283.herokuapp.com/
+
+At least that was the original plan.
+
+== The Idea
+An app that would look for leaders in your area and display their twitter accounts in a nice scrolling thing. 
+The user would then be able to easily see their local leaders' tweets and easily send tweets to them.
+
+== Actual Implementation
+Hunting down leaders by area is beyond what I have time for.
+Therefore I just plugged in a bunch of leader parody accounts because they were fun.
+
