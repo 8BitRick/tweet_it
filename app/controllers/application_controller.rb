@@ -36,7 +36,17 @@ class ApplicationController < ActionController::Base
   end
 
   def update_influencers
-    influencer_list = ['fakegrimlock','kimjongnumberun','thepresobama','elbloombito']
+    influencer_list = %w(
+        fakegrimlock kimjongnumberun thepresobama elbloombito Queen_UK
+    DarthVader
+    NotZuckerberg
+    Lord_Voldemort7
+    BoredElonMusk
+    BettyFckinWhite
+    ItsWillyFerrell
+    Charles_HRH
+    FakeScience
+    Plaid_Gaddafi)
 
     # Save off our influencers
     influencer_list.each do |influencer|
