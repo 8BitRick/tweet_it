@@ -1,6 +1,14 @@
 class Tweet < ActiveRecord::Base
   include ActionView::Helpers::DateHelper
 
+  def self.latest_tweets
+    Tweet.order(tweet_time: :desc).take(20)
+  end
+
+  def self.display_name
+    'All leader\'s'
+  end
+
   def user_pic_url
     return @user_pic if @user_pic
 

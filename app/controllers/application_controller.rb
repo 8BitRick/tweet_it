@@ -20,9 +20,8 @@ class ApplicationController < ActionController::Base
     update_influencers if Influencer.count <= 0
 
     @influencers = Influencer.all
-    @last_user = Influencer.first.handle
-    @display_user = @last_user
-    @tweets = Tweet.where(user: @last_user)
+    @tweets = Tweet.latest_tweets
+    @display_user = Tweet.display_name
     #@tweets = statuses
   end
 

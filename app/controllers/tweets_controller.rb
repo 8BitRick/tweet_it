@@ -10,33 +10,16 @@ class TweetsController < ApplicationController
 
     if(user)
       if(cache_updated || user != @last_user)
-        @tweets = Tweet.where(user: user).take(20)
+        @tweets = Influencer.find_by(handle: user).latest_tweets
       end
 
       @display_user = user
       @last_user = user
     else
-      @tweets = Tweet.all.take(20)
-      @display_user = 'All leader\'s'
+      @tweets = Tweet.latest_tweets
+      @display_user = Tweet.display_name
       @last_user = nil
     end
-  end
-
-  def update_tweet_cache(user)
-    inf = Influencer.find_by(handle: user)
-    if(inf.nil?)
-      return false
-    end
-
-    # Check if need to update tweet cache for this influencer
-    if(inf.last_tweet_request.nil? || (inf.last_tweet_request > 2.minutes.ago))
-      raw_tweets = client.user_timeline(user)
-      save_tweets(raw_tweets)
-      inf.last_tweet_request = Time.now
-      return true
-    end
-
-    false
   end
 
   # GET /tweets/1

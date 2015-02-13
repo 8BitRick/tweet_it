@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212053531) do
+ActiveRecord::Schema.define(version: 20150212235119) do
 
   create_table "influencers", force: :cascade do |t|
     t.string   "name"
@@ -32,7 +32,10 @@ ActiveRecord::Schema.define(version: 20150212053531) do
     t.text     "raw"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "tweet_time"
   end
+
+  add_index "tweets", ["tweet_time"], name: "index_tweets_on_tweet_time"
 
   create_table "users", force: :cascade do |t|
     t.string   "provider"
