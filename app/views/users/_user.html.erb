@@ -1,9 +1,7 @@
 <li class="touchcarousel-item">
-  <a class="item-block" href="#">
-    <%= image_tag(user.user_pic_url, :alt => "user_profile picture") %>
-    <!--<#%= image_tag(user.profile_bg_url, :alt => "user_profile picture", width:170, height:230) %>-->
-    <!--<img src="demo-images/170x230/1.jpg" width="170" height="230" />-->
+  <%= link_to controller: 'tweets', action: 'index', user: user.name, remote: true do %>
+    <%= image_tag(user.user_pic_url, :alt => "user_profile picture", width: 150, height: 150) %>
     <h4><%= user.name %></h4>
     <p><%= user.description %></p>
-  </a>
+  <% end %>
 </li>

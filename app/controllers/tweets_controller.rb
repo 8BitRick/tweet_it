@@ -10,7 +10,7 @@ class TweetsController < ApplicationController
 
     if(user)
       if(cache_updated || user != @last_user)
-        @tweets = Influencer.find_by(handle: user).latest_tweets
+        @tweets = find_twitter_user(user).latest_tweets
       end
 
       @display_user = user

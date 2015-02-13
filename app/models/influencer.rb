@@ -1,5 +1,5 @@
 class Influencer < ActiveRecord::Base
-  def latest_tweets
-    Tweet.where(user: handle).order(tweet_time: :desc).take(20)
-  end
+  include TwitterUser
+
+  def latest_tweets; latest_tweets_for_user(handle) end
 end

@@ -6,7 +6,7 @@ class Tweet < ActiveRecord::Base
   end
 
   def self.display_name
-    'All leader\'s'
+    'All leader'
   end
 
   def user_pic_url

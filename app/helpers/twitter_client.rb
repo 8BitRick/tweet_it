@@ -8,8 +8,12 @@ module TwitterClient
     end
   end
 
+  def find_twitter_user(user)
+    Influencer.find_by(handle: user) || User.find_by(name: user)
+  end
+
   def update_tweet_cache(user)
-    inf = Influencer.find_by(handle: user)
+    inf = find_twitter_user(user)
     if(inf.nil?)
       return false
     end

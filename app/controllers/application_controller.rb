@@ -16,9 +16,9 @@ class ApplicationController < ActionController::Base
   def tweet_it
     # Influencers will only be established once
     # TODO - add some way to refresh the leader list, esp if we make it dynamic
-    pp followers
     update_influencers if Influencer.count <= 0
 
+    @users = [current_user]
     @influencers = Influencer.all
     @tweets = Tweet.latest_tweets
     @display_user = Tweet.display_name
@@ -42,7 +42,6 @@ class ApplicationController < ActionController::Base
     NotZuckerberg
     Lord_Voldemort7
     BoredElonMusk
-    BettyFckinWhite
     ItsWillyFerrell
     Charles_HRH
     FakeScience

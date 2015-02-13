@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212235119) do
+ActiveRecord::Schema.define(version: 20150213004536) do
 
   create_table "influencers", force: :cascade do |t|
     t.string   "name"
@@ -41,9 +41,10 @@ ActiveRecord::Schema.define(version: 20150212235119) do
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.text     "raw"
+    t.datetime "last_tweet_request"
   end
 
 end
