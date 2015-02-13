@@ -17,6 +17,7 @@ module TwitterClient
     if(inf.nil?)
       return false
     end
+    p 'Found influencer ' + user
 
     # Check if need to update tweet cache for this influencer
     if(inf.last_tweet_request.nil? || (inf.last_tweet_request > 10.minutes.ago))

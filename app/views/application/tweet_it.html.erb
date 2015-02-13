@@ -14,11 +14,11 @@
 <div class="row top-buffer">
   <div class="col-md-6 well col-md-offset-3">
     Post your tweet!
-    <%= form_tag ({action: "post_tweet", method: :post, class: 'input-group', remote: true}) do %>
+    <%= form_tag url_for(controller: 'application', action: "post_tweet", format: :js), remote: true do %>
     <div class="input-group">
-      <input name="tweet_to_post" type="text" class="form-control" placeholder="@Governator ... you are so great" aria-describedby="basic-addon1">
+      <input name="tweet_to_post" id="tweet_text_box" type="text" class="form-control" placeholder="@Governator ... you are so great" aria-describedby="basic-addon1">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="submit">Tweet It!</button>
+        <%= submit_tag 'Tweet It!', class: 'btn btn-default', remote: true %>
       </span>
     </div>
     <% end %>

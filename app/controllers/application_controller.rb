@@ -30,9 +30,16 @@ class ApplicationController < ActionController::Base
   end
 
   def post_tweet
-    pp params
     client.update(params[:tweet_to_post])
-    redirect_to '/tweet_it'
+
+    # Invalidate our cache for user
+    current_user.last_tweet_request = nil
+    current_user.save
+
+    respond_to do |format|
+      format.html { redirect_to '/tweet_it' }
+      format.js
+    end
   end
 
   def update_influencers
